@@ -1,0 +1,42 @@
+p{
+	@include serif-text(15px, 1.6em);
+	// font: 15px/1.6em $serif-fonts;
+	margin: 0 0 #{$grid-gap / 2} 0;
+}
+
+a{
+	color: $color-links;
+	text-decoration: none;
+
+	&:hover{
+		text-decoration: underline;
+	}
+}
+
+
+// This is the paywall/meter/registration sticky note at the bottom of the page
+.met-flyout .met-promo-content{
+	p {
+		line-height: 1.3em;
+		font-family: "Arial", sans-serif;
+		span{
+			font: 14px/1.3em "Arial", sans-serif;
+			color:white;
+			width:100%;
+			margin: 0;
+
+			&:first-of-type{
+				font-weight: 700;
+			}
+
+			a {
+				font: 14px/1.3em "Arial", sans-serif !important;
+				
+			}
+		}
+	}
+}
+
+@media all and (min-width:$tablet-min-width){
+	p{ font-size: 18px; }
+}

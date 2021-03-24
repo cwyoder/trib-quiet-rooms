@@ -1,0 +1,515 @@
+// Enables Tribune colors, but is required for everything.
+@import 'base-variables';
+// @import 'base-config'; // If you are using the off-platform blueprint, uncomment this.
+@import 'seclusion-config';
+
+// ---- ADD MORE VARIABLES HERE ---------------------------------------------
+// ---- (If working off platform, you can overide variable values here) -----
+
+@import url('https://fonts.googleapis.com/css?family=Raleway:600,700,700i,800&display=swap');
+
+
+// Required for everything, too, but can be broken down into smaller explicit imports if desired. 
+@import 'base-mixins';
+
+// ---- MAKE OR IMPORT MORE MIXINS HERE ---------------------------------------------
+@import 'breakpoint-mixins';
+
+
+// ---- TRIB CLASSES, UNCOMMENT THE ONES YOU WANT -----------------------------------
+// @import 'ngux-visibility-toggles';
+// @import 'trib-bulletbox';
+// @import 'trib-buttons';
+@import 'trib-colors';
+@import 'trib-images-charts';
+// @import 'trib-legends';
+// @import 'trib-skeleton';
+// @import 'trib-tables';
+// @import 'trib-timeline-basic';
+@import 'trib-typography';
+// @import 'trib-utilities';
+@import "trib-embedded-content";
+
+
+// ---- OFF-PLATFORM COMPONENT STYLES, UNCOMMENT THE ONES YOU WANT --------------------
+// ---- (You'll need most or all of them) ---------------------------------------------
+@import 'base-scaffolding';
+@import 'base-footer';
+@import 'base-navbar';
+@import 'base-social';
+@import 'base-byline';
+@import 'base-adverts';
+// @import 'base-comments';
+// @import 'base-call-to-action';
+@import 'base-refers';
+@import 'base-hamburger';
+@import 'trib-typography-projects';
+@import 'quotes';
+@import '_drift';
+@import 'lede';
+@import 'credits';
+@import 'new-adverts';
+
+
+// ---- IMPORT PROJECT STYLES FROM PARTIAL FILES HERE ---------------------------------------------
+
+
+
+// ---- WRITE MORE PROJECT STYLES HERE ---------------------------------------------
+
+body {
+	margin: 0;
+}
+
+.sr-only{
+	// Use this to hide elements from everything except screen readers.
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+
+//NAVBAR
+.navbar__subscribe {
+	@include sans-serif-text(14px, 1.4em);
+	margin-right: 15px;
+	border: 1px solid white;
+	color: white;
+	padding: 3px 5px;
+
+	&:hover {
+		background-color: $trib_blue3;
+	}
+}
+
+.navbar [itemprop="publisher"] {
+	display: flex;
+	align-items: center;
+}
+
+
+
+p{
+	font: 16px/1.6em $serif-fonts;
+	margin: 0 0 #{$grid-gap / 2} 0;
+}
+
+a{
+	color: $color-links;
+	text-decoration: none;
+
+	&:hover{
+		text-decoration: underline;
+	}
+}
+
+.graphic-embed {
+	margin: 60px 0 40px 0;
+}
+
+.chart {
+	iframe {
+		min-width:100%;
+		width: 280px;		
+	}
+}
+
+//REFERS
+.refer {
+	background: $trib_gray4;
+	padding: 20px;
+
+	&__button {
+		color: white;
+		background: $trib_blue2;
+		transition: color 150ms ease;
+		font-weight: bold;
+		margin: 15px 30px 0 0;
+		@include breakpoint(sm) {
+			margin: 30px 30px 0 0;
+		}
+		&:hover {
+			background: $trib_blue3;
+			color: white;
+		}
+	}
+}
+
+
+
+//CREDITS
+
+.credits {
+	margin: 80px 0;
+
+	p {
+		font-style: italic;
+		color: #777;
+		margin: 40px 0;
+	}
+}
+
+.credit-img {
+	float: left;
+	width: 60px;
+	margin: 0 10px 0 0;
+
+	img {
+		width: 100%;
+		border-radius: 50%;
+	}
+}
+
+//PHOTO DEBUG SLUG
+
+.debug-slug {
+	display: none;
+	@include sans-serif-text(13px, 1.4em);
+	color: $trib_gray3;
+	margin: 0;
+	font-style: italic;
+}
+
+//BYLINES
+
+.bylines {
+	text-align: center;
+	max-width: 650px;
+	margin: 0 auto;
+
+	.by, .photog {
+		@include sans-serif-text(16px, 1.4em);
+		font-weight: bold;
+		margin: 0 0 10px 0;
+	}
+
+	.bylines-note {
+		margin: 0;
+
+		p {
+			@include sans-serif-text(16px, 1.4em);
+			font-style: italic;
+			margin: 0 0 10px 0;			
+		}
+	}
+
+	time {
+		margin: 0 0 10px 0;
+	}
+}
+
+//VIDEO PORTRAITS
+
+.video_portrait {
+	width: 100%;
+}
+
+.caption {
+	&__inset {
+		position: relative;
+
+		figcaption {
+			margin-top: 0;
+			font-size: 15px;
+			font-weight: bold;
+			width: 30%;
+			min-width: 200px;
+			max-width: 350px;
+			background: rgba(255,255,255,0.8);
+			padding: 15px;
+			position: absolute;
+			left: 10px;
+			bottom: 14px;
+		}
+	}
+}
+
+//DROPCAPS
+
+.seclusion-dropcap > p:first-of-type {
+    font-size: 1.15em;
+    line-height: 1.3em;
+
+	// Story dropcap
+	&:first-letter{
+		font-family: "Raleway", sans-serif;
+		font-size: 4.65rem;
+		font-weight: 800;
+		line-height: 0.94em;
+		text-align: center;
+		float: left;
+		display: inline-block;
+		position: relative;
+		margin-right: .08em;
+		color: black;
+	}
+}
+
+//BREAKERS
+
+.seclusion_breaker {
+	margin: 50px 0 20px 0;
+	img {
+		margin: 0 auto;
+		width: 30px;
+		display: block;
+	}
+	h2 {
+		font-family: "Raleway", sans-serif;
+		font-size: 32px;
+		line-height: 1.3em;
+		font-weight: 800;
+		text-align: center;
+		text-transform: uppercase;
+		@include breakpoint(xs) {
+			font-size: 27px;
+		}
+	}
+
+	hr {
+		width: 40%;
+		margin: 0 auto 80px auto;
+	}
+}
+
+//PHOTO ARRANGMENTS
+.photo-arr__override-caption {
+	@include agate();
+	width: 100%;
+	box-sizing: border-box;
+	margin-top: 7px;;
+}
+
+.photo-arr {
+	margin: 30px 0;
+	.image {
+		margin: 30px 0 0 0;
+	}
+}
+
+.remove-margin {
+	&__bottom {
+		margin: 30px 0 0 0;
+	}
+	&__top {
+		margin: 0 0 30px 0;
+	}
+}
+
+//DOCUMENTS
+
+.document-wrapper {
+	margin: 40px 0;
+
+	h4 {
+		@include sans-serif-text(20px, 1.3em, bold);
+		margin: 0 0 10px 0;
+	}
+
+	p {
+		@include sans-serif-text(16px, 1.4em);
+		margin: 0 0 10px 0;
+
+		@include breakpoint(xs) {
+			font-size: 15px;
+		}
+
+	}
+
+	.trib-image {
+		margin: 25px 0 0 0;
+	}
+}
+
+.document_arr {
+	margin: 40px 0;
+	
+	.document-wrapper {
+		margin: 0 0 30px 0;
+
+		&:last-child {
+			margin: 0;
+		}
+	}
+}
+
+.photo-arr--intro {
+	h4 {
+		@include sans-serif-text(20px, 1.3em, bold);
+		margin: 0 0 10px 0;
+	}
+
+	p {
+		@include sans-serif-text(16px, 1.4em);
+		margin: 0 0 10px 0;
+	}
+}
+
+.document-container {
+	position: relative;
+	figcaption {
+		margin-top: 2px;
+	}
+
+	img {
+		-webkit-user-select: none;
+		-webkit-touch-callout: none;
+	}
+}
+
+.gray-bg {
+	background: $trib_gray4;
+	padding: 15px 15px 20px 15px;
+
+	&__bottom-pad {
+		padding: 15px 15px 0 15px;
+	}
+}
+
+.hover-label {
+	position: absolute;
+	background: #636669;
+	border-radius: 10px;
+	padding: 4px 10px;
+	top: -18px;
+	right: 10px;
+	box-shadow: 1px 1px 8px rgba(0,0,0,0.7);
+	pointer-events: none;
+
+	p {
+		font-size: 11px;
+		color: white;
+		text-transform: uppercase;
+		margin: 0;
+		font-weight: bold;
+	}
+}
+
+.magnify-icon {
+
+	img {
+		width: 12px;
+	}
+}
+
+//DRIFT-ZOOM
+.drift-zoom-pane.drift-inline {
+	position: absolute;
+	width: 150px;
+	height: 150px;
+	border-radius: 75px;
+	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+}
+
+
+@media all and (min-width: $phablet-min-width){
+	// By default, this is 450px+
+	p{
+		font-size: 18px;
+		line-height: 1.5em;
+	}
+
+	.bylines {
+		.by, .photog {
+			font-size: 18px;
+		}
+
+		.bylines-note {
+			p {
+				font-size: 18px;
+			}
+		}
+	}
+
+
+	.seclusion-dropcap > p:first-of-type {
+    	font-size: 1.4em;
+    	line-height: 1.65em;
+	}
+
+	.drift-zoom-pane.drift-inline {
+		position: absolute;
+		width: 250px;
+		height: 170px;
+		border-radius: 0px;
+		box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+	}
+
+	.document-wrapper {
+		.trib-image {
+			margin: 10px 0 0 0;
+		}
+	}
+
+	.hover-label {
+		top: -5px;
+		right: 20px;
+
+		p {
+			font-size: 13px;
+		}
+	}
+
+	.image--small {
+		float: right;
+		width: 200px;
+		margin: 0 0 0 30px;
+	}
+}
+
+@media all and (min-width: $tablet-min-width){
+	// ONLY CHANGES FOR TABLETS + DESKTOPS
+	// By default, this is 650px+	
+
+
+
+	//PHOTO ARRANGEMENTS
+
+	.photo-arr {
+		display: flex;
+		justify-content: space-between;
+		align-items: stretch;
+		margin: 30px 0;
+		flex-wrap: wrap;
+
+		&--2 .image {
+		    width: calc((100% - 30px) / 2);
+		}
+
+		&--4 {
+			.image {
+			    width: calc((100% - 30px) / 2);
+			    margin: 0 0 30px 0;
+			}
+		}
+
+	}
+
+	.remove-margin {
+		&__bottom {
+			margin: 30px 0 0 0;
+		}
+		&__top {
+			margin: 0 0 30px 0;
+		}
+	}
+
+	.image--small {
+		width: 280px;
+	}
+
+
+}
+
+@media all and (min-width: $desktop-min-width){
+	// ONLY CHANGES FOR DESKTOPS
+	// By default, this is 850px+
+
+	.image--small {
+		margin: 0 -100px 0 30px;
+	}
+}

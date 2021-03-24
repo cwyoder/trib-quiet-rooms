@@ -1,0 +1,54 @@
+// Breakpoints
+$phablet-min-width:450px !default;
+$tablet-min-width:650px !default;
+$desktop-min-width:850px !default;
+
+// TYPOGRAPHY
+$sans-serif-fonts: "Arial", "Helvetica", sans-serif !default;
+$serif-fonts: "Georgia", serif !default;
+$color-links: $trib-blue4 !default;
+
+// SCAFFOLDING
+$grid-gap: 30px !default;
+
+$river-max-width: $phablet-min-width !default;
+
+// FOOTER
+$footer-background-color: $trib-blue1 !default;
+
+// NAVBAR
+$navbar_background_color: $trib-blue2 !default;
+$navbar_inner_height: 25px !default; // This does NOT include padding top/bottom
+$navbar_tab_width: 260px !default;
+$navbar_padding_h: 0 !default;
+$navbar_padding_v: 10px !default;
+$border-radius--small: 5px;
+$border-radius--large: $grid-gap / 2;
+$navbar-overall-height: $navbar_inner_height + $navbar_padding_v + $navbar_padding_v;
+$hamburger-background-color: rgba($trib-blue1, .9) !default;
+
+// SOCIAL SHARE ICONS
+$social_icon_base_color: #000; //$trib-gray3 !default;
+$social-icon-width: 25px !default;
+$social_colors: (
+	twitter: #76A9EA,
+	facebook: #475993,
+	google: #DC4E41,
+	email: $trib-blue2
+) !default;
+
+
+// COMMENTS
+$comments-button-color: $trib-blue2 !default;
+$comments-button-text-color: black !default;
+
+// CALLS TO ACTION
+
+// $cta-background-color: $trib-blue4 !default;
+// $cta-text-color: #{set-text-color($cta-background-color, true)} !default;
+// $cta-button-base-color: $trib-orange !default;
+// $cta-button-color: lighten($cta-button-base-color, 5%) !default;
+// $cta-button-color-text: #{set-text-color($cta-button-color, true)} !default;
+// $cta-button-hover-color: $cta-button-base-color !default;
+// $cta-button-hover-color-text: #{set-text-color($cta-button-base-color, true)} !default;
+// $cta-right-max-width: ($tablet-min-width / 2) - $grid-gap !default;

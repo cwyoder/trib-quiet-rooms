@@ -1,0 +1,25 @@
+{
+  "name": "tribune-tarbell-blueprint-two",
+  "version": "1.0.0",
+  "description": "The Chicago Tribune's base blueprint for off-platform Tarbell projects",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@tribune.unfuddle.com:tribune/tribune-tarbell-blueprint-two.git"
+  },
+  "keywords": [
+    "Tarbell",
+    "blueprint"
+  ],
+  "author": "Ryan Marx",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "^1.0.2",
+    "grunt-svgstore": "^1.0.0"
+  },
+  "dependencies": {
+    "html-entities": "^1.2.1"
+  }
+}

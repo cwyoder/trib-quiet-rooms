@@ -1,0 +1,49 @@
+.credits-box {
+	max-width: 1000px;
+	margin: 40px auto;
+}
+
+.credits-title {
+	margin: 0 auto 0 auto;
+
+	h4 {
+		@include sans-serif-text(23px, 1.3em, bold);
+		margin: 0;
+		text-align: center;
+	}
+}
+
+.credits-list {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin-right: -30px;
+}
+
+.credit-container{
+	flex: 1 1 200px;
+	margin-right: 30px;
+    padding: 20px;
+    box-sizing: border-box;	
+}
+
+.credit {
+	margin: 0;
+	text-align: center;
+
+	dt {
+		@include sans-serif-text(14px, 1.3em, bold);
+		text-transform: uppercase;
+		margin: 0;
+
+	}
+
+	dd {
+		@include sans-serif-text(16px, 1.3em);
+		margin: 0;
+
+		span {
+			white-space: nowrap;
+		}
+	}
+}

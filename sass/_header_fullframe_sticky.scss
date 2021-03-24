@@ -1,0 +1,196 @@
+.seclusion-header {
+	margin: 0 0 80px 0;
+}
+
+.header-img {
+	width: 100%;
+	margin: 0;
+
+	img {
+		width: 100%;
+	}
+
+	figcaption {
+		@include sans-serif-text(13px, 1.4em);
+		margin: 0 10px 0 20px;
+	}
+}
+
+
+///
+/// Viewport sized typography with minimum and maximum values
+///
+/// @author Eduardo Boucas (@eduardoboucas)
+///
+/// @param {Number}   $responsive  - Viewport-based size
+/// @param {Number}   $min         - Minimum font size (px)
+/// @param {Number}   $max         - Maximum font size (px)
+///                                  (optional)
+/// @param {Number}   $fallback    - Fallback for viewport-
+///                                  based units (optional)
+///
+/// @example scss - 5vw font size (with 50px fallback), 
+///                 minumum of 35px and maximum of 150px
+///  @include responsive-font(5vw, 35px, 150px, 50px);
+///
+
+
+.social-share-container {
+	margin: 0 auto 0 auto;
+	width: 105px;
+}
+
+
+.headline-container {
+	margin: 20px auto 0 auto;
+	padding: 0 20px;
+
+	h1 {
+		font-family: 'Open Sans', sans-serif;
+		font-weight: 900;
+		margin: 0 0 10px 0;
+		font-size: 70px;
+		// @include responsive-font(10.15vw, 70px, 110px, 95px);
+		line-height: 1em;
+		text-align: center;
+	}
+
+	h2 {
+		font-family: 'Open Sans', sans-serif;
+		font-weight: 500;
+		font-style: italic;
+		margin: 0 auto 20px auto;
+		font-size: 23px;
+		// @include responsive-font(4.0vw, 22px, 30px, 28px);
+		width: 90%;
+		text-align: center;
+	}
+}
+
+.bylines {
+	color:$trib_gray1;
+	@include sans-serif-text(14px, 1.4em,bold);
+	margin-bottom:10px;
+	text-align: center;
+}	
+
+.underline {
+	@include sans-serif-text(11px, 1.3em);
+	text-transform:uppercase;
+	margin-bottom:10px;
+	text-align: center;
+}
+
+[itemprop="dateModified"] {
+	@include sans-serif-text(11px, 1.3em);
+	text-transform:uppercase;
+	font-style:italic;
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+
+
+
+@media all and (min-width: $tablet-min-width){
+	.seclusion-header {
+		position: relative;
+		height: 150vh;
+	}
+
+	.social-share-container {
+		margin: 0;
+		width: 100%;
+	}
+
+
+	.headline-container {
+		padding: 25px;
+		position: absolute;
+		overflow: visible;
+		top: 10vh;
+		right: 3vw;
+		max-width: 360px;
+		z-index: 30;
+		border: 4px solid white;
+		box-shadow: 0px 0px 5px 1px black, inset 0px 0px 5px 1px black;
+
+		h1 {
+			color: white;
+			text-shadow: 1px 1px 5px black;
+			text-align: left;
+			max-width: 600px;
+		}
+
+		h2 {
+			color: white;
+			text-shadow: 1px 1px 5px black;
+			text-align: left;
+			margin: 0 0 20px 0;
+			max-width: 450px;
+		}
+	}
+
+	.network__icon {
+		fill: white;
+	}
+
+	.header-img {
+		//width: 100vw;
+		height: 100vh;
+		position: sticky;
+		top: 45px;
+		z-index: -10;
+		margin: 0;
+
+		@supports (object-fit:cover){
+			// using object fit basically lets you position/size images 
+			// as if they were backgrounds. Should work for nearly all
+			// browsers. F*** you IE11
+
+			img {
+				height: 100%;
+				width: 100%;
+			    object-fit: cover;
+			    object-position: left;
+			}
+		}
+		
+		@supports not (object-fit:cover){
+			// This is the fallback to object-fit
+			img {
+				height: 100%;
+				width: auto;
+				margin: 50vh 0 0 50vw;
+				transform: translate(-50%,-50%);
+			}
+		}
+
+	}
+
+	.bylines {
+		font-size: 18px;
+		color: white;
+		text-shadow: 1px 1px 5px black;
+		text-align: left;
+	}
+
+	.underline {
+		font-size: 13px;
+		color: white;
+		text-shadow: 1px 1px 5px black;
+		text-align: left;
+	}
+	
+	[itemprop="dateModified"] {
+		font-size: 13px;
+		color: white;
+		text-shadow: 1px 1px 5px black;
+		text-align: left;
+	}
+
+
+	.trib-image--header figcaption {
+		font-size: 16px;
+	}
+}

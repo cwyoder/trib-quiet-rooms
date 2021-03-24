@@ -1,0 +1,38 @@
+{% extends "_base.html" %}
+
+{% block library_scripts %}
+	{# <script src="//{{ ROOT_URL }}/js/vendor.min.js" type="text/javascript"></script> #}
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+{% endblock stylesheets %}
+
+
+{% block content %}
+	{# YOUR STUFF GOES HERE #}
+	<div class="advert" data-ad-type="leaderboard"></div>
+	<section id='intro' class='intro container'>
+		<div class='river'>
+			<div class="advert" data-ad-type="shrinky-cube"></div>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque dolores ipsum quo? Accusamus, excepturi impedit a magni exercitationem molestiae repellendus cumque, sed ullam ex dicta dolore minus esse fugit, et.</p>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque dolores ipsum quo? Accusamus, excepturi impedit a magni exercitationem molestiae repellendus cumque, sed ullam ex dicta dolore minus esse fugit, et.</p>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque dolores ipsum quo? Accusamus, excepturi impedit a magni exercitationem molestiae repellendus cumque, sed ullam ex dicta dolore minus esse fugit, et.</p>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque dolores ipsum quo? Accusamus, excepturi impedit a magni exercitationem molestiae repellendus cumque, sed ullam ex dicta dolore minus esse fugit, et.</p>
+		</div>
+	</section>
+	{{ refer() }}
+	<section id='content' class='content container'></section>
+	<section id='credits' class='credits container'>
+		<div class='river'>
+			{% if note %}{{ note|markdown }}{% endif %}
+			{% if sources %}{{ sources|markdown }}{% endif %}
+			{% if credit %}{{ credit|markdown }}{% endif %}
+		</div>
+	</section>
+{% endblock content %}
+
+
+{% block scripts %}
+	{# <script src="//{{ ROOT_URL }}/js/app.min.js" type="text/javascript"></script> #}
+{% endblock %}

@@ -1,0 +1,39 @@
+
+
+
+.social-networks{
+	list-style:none;
+	padding: 0;
+	margin: #{$grid-gap} 0 #{$grid-gap / 2} 0;
+
+	display: flex;
+	justify-content: flex-start;
+	align-content: center;
+	align-items: center;
+	flex-wrap: nowrap;
+}
+
+.network{
+	width: $social-icon-width;
+	margin: 0 15px 0 0;
+	cursor:pointer;
+	
+	&:last-child{
+		margin-right: 0;
+	}
+
+	&__icon{
+		fill: $social_icon_base-color;
+		cursor:pointer;
+	}
+}
+
+
+// create the variant classes for each network in the color map
+@each $network, $color in $social-colors{
+	.network--#{$network}{
+		.network__icon:hover, .network__icon:focus {
+			fill: #{$color};
+		}
+	}
+}

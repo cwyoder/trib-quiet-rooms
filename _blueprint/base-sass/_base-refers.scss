@@ -1,0 +1,111 @@
+$refer-background-color: $trib-blue4 !default;
+$refer-text-color: #{set-text-color($refer-background-color, true)} !default;
+$refer-button-base-color: $trib-orange !default;
+$refer-button-color: lighten($refer-button-base-color, 5%) !default;
+$refer-button-color-text: #{set-text-color($refer-button-color, true)} !default;
+$refer-button-hover-color: $refer-button-base-color !default;
+$refer-button-hover-color-text: #{set-text-color($refer-button-base-color, true)} !default;
+$refer-right-max-width: ($river-width-large / 2) - $grid-gap !default;
+
+
+.refer{
+	background: $refer-background-color;
+	text-align:center;
+	box-sizing:border-box;
+	padding: $grid-gap;
+	margin: $grid-gap 0;
+	width: 100%;
+	overflow:hidden;
+
+	&__inner{
+		display:flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;	
+		margin: #{0 - $grid-gap} #{0 - $grid-gap} 0 0; // To simulate margin collapse with flex;
+	}
+
+	&__text-wrapper{
+		flex: 1 1 200px;
+		max-width: fit-content;
+		margin: $grid-gap $grid-gap 0 0;
+	}
+
+
+	&__headline{
+		@include sans-serif-text(18px, 1.3em, bold);
+		// margin: 0 0 #{$grid-gap / 2} 0;
+		margin: 0;
+		color: $refer-text-color;
+	}
+
+	&__text{
+		@include sans-serif-text(15px, 1.3em);
+		// We never want extraneous margin-bottom, so this item should push itself down if it is there.
+		margin: #{$grid-gap / 3} 0 0 0;
+		color: $refer-text-color;
+	}
+
+	&__button{
+		@include sans-serif();
+		text-align: center;
+		display:block;
+		padding:#{$grid-gap / 2} 0;
+
+		background:$refer-button-color;
+		transition: background-color 150ms ease;
+		color:$refer-button-color-text;
+		cursor:pointer;
+		
+		text-decoration:none;
+
+		margin: $grid-gap $grid-gap 0 0;
+		flex: 1 1 125px;
+		max-width: 125px;
+
+
+		&:hover, &:focus{
+			color:$refer-button-hover-color-text;
+			text-decoration: none;
+			background:$refer-button-hover-color;			
+			transition: background-color 150ms ease;
+		}
+	}
+}
+
+.refer.refer--has-image{
+	
+	.refer__button{
+		// Give it standard margins since it's inside the text-wrapper
+		margin: #{$grid-gap / 3} auto 0 auto;
+	}
+
+	.refer__image{
+		flex: 1 1 250px;
+		margin: #{$grid-gap} #{$grid-gap} 0 0;
+	}
+	
+	.refer__text-wrapper{
+		flex: 2 2 250px;
+	}
+
+}
+
+
+@media all and (min-width: $river-width-large){
+	// ONLY CHANGES FOR when the window is at least as wide as the river	
+	.refer.refer--right{
+		display:block;
+		float:right;
+		max-width: $refer-right-max-width;
+		margin: 0 0 #{$grid-gap} #{$grid-gap};
+	}
+
+}
+
+@media all and (min-width: #{$river-width-large + $refer_right_max_width}){
+	// ONLY CHANGES FOR DESKTOPS
+	.refer.refer--right{
+		margin-right: #{$refer_right_max_width / -2};
+	}
+}

@@ -1,0 +1,38 @@
+$river-width-large: 650px !default;
+$river-width-small: 450px !default;
+$container_padding_v: 0 !default;
+$container_padding_h: $grid-gap / 2 !default;
+$container-max-width: 1500px !default;
+
+%container{
+	max-width: $container_max_width;
+	margin:0 auto;
+	padding: $container_padding_v $container_padding_h;
+	box-sizing:border-box;
+	position:relative;
+}
+
+.container{
+	@extend %container;
+}
+
+
+.river{
+	max-width: $river-width-small;
+	margin: 0 auto;
+}
+
+header{
+	margin-bottom:$grid-gap;
+}
+
+section{
+	margin-bottom: $grid-gap;
+}
+
+
+@media all and (min-width: $river-width-large){
+	.river{
+		max-width: $river-width-large;
+	}
+}

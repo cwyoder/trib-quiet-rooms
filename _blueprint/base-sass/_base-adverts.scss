@@ -1,0 +1,52 @@
+.container .advert{
+	// Containers have a little padding which squeezes things 
+	// on mobile. So we'll adjust for that here.
+	/*
+		The mobile banners are 320px wide. If the container has ANY
+		padding on it at all, then the banner will overflow the <body> on
+		smallest devices and that is not good. So, we will pull it to the 
+		left equal to the padding, so on iPhones the banner is effectively 
+		fullwidth.
+	*/
+
+	margin:$grid-gap #{0 - $container_padding_h};
+}
+
+.advert{
+	// Defauilt style on adverts has no horiz margin. You'll need to adjust
+	// for spacing peculiarities yourself. Blah!
+	margin:$grid-gap 0;
+	text-align: center; // center the iframe within the container.
+	box-sizing: border-box;
+	width: 100%;
+
+	&:before{
+		content: "Advertisement";
+		font: 12px/1em sans-serif;
+		color: #888;
+		text-align: center;
+		display: block;
+		margin-bottom: 5px;
+	}
+
+}
+
+
+
+@media all and (min-width:769px){
+	// This is the breakpoint when the mini banners become cubes.
+	.advert{
+		&[data-ad-type="leaderboard"], &[data-ad-type="banner"]{
+			width: 100%;
+		}
+
+		&[data-ad-type="shrinky-cube"],&[data-ad-type="cube"]{
+			width: 300px;
+
+			&.advert--right{
+				float:right;
+				margin: 0 0 #{$grid-gap} #{$grid-gap};
+			}
+		}
+	}
+}

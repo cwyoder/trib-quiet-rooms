@@ -1,0 +1,474 @@
+{% from 'base-subtemplates/_macros.html' import refer as refer with context %}
+
+{% macro seclusion_subscribe_refer(alignment=False, add_class="") %}
+  {% if alignment %}  
+    {% set add_class = add_class ~ " refer--" ~ alignment%}
+  {% endif %}
+  
+  {% set has_image = False %}
+  {% if refers['subscribe']['image_url'] %}
+    {% set has_image = refers['subscribe']['image_url'] %}
+  {% endif %}
+
+  {{  refer(refers['subscribe']['headline'], 
+      refers['subscribe']['text'], 
+      refers['subscribe']['button_url'], 
+      refers['subscribe']['button_text'], 
+      has_image=has_image,
+      add_class=add_class) }}
+
+{% endmacro %}
+
+{% macro seclusion_sidebar_refer(alignment=False, add_class="") %}
+  {% if alignment %}  
+    {% set add_class = add_class ~ " refer--" ~ alignment%}
+  {% endif %}
+  
+  {% set has_image = False %}
+  {% if refers['sidebar']['image_url'] %}
+    {% set has_image = refers['more']['image_url'] %}
+  {% endif %}
+
+  {{  refer(refers['sidebar']['headline'], 
+      refers['sidebar']['text'], 
+      refers['sidebar']['button_url'], 
+      refers['sidebar']['button_text'], 
+      has_image=has_image,
+      add_class=add_class) }}
+
+{% endmacro %}
+
+{% macro seclusion_methodology_refer(alignment=False, add_class="") %}
+  {% if alignment %}  
+    {% set add_class = add_class ~ " refer--" ~ alignment%}
+  {% endif %}
+  
+  {% set has_image = False %}
+  {% if refers['methodology']['image_url'] %}
+    {% set has_image = refers['more']['image_url'] %}
+  {% endif %}
+
+  {{  refer(refers['methodology']['headline'], 
+      refers['methodology']['text'], 
+      refers['methodology']['button_url'], 
+      refers['methodology']['button_text'], 
+      has_image=has_image,
+      add_class=add_class) }}
+
+{% endmacro %}
+
+{% macro seclusion_fetcher_refer(alignment=False, add_class="") %}
+  {% if alignment %}  
+    {% set add_class = add_class ~ " refer--" ~ alignment%}
+  {% endif %}
+  
+  {% set has_image = False %}
+  {% if refers['fetcher']['image_url'] %}
+    {% set has_image = refers['more']['image_url'] %}
+  {% endif %}
+
+  {{  refer(refers['fetcher']['headline'], 
+      refers['fetcher']['text'], 
+      refers['fetcher']['button_url'], 
+      refers['fetcher']['button_text'], 
+      has_image=has_image,
+      add_class=add_class) }}
+
+{% endmacro %}
+
+{% macro seclusion_newsletter_refer(alignment=False, add_class="") %}
+  {% if alignment %}  
+    {% set add_class = add_class ~ " refer--" ~ alignment%}
+  {% endif %}
+  
+  {% set has_image = False %}
+  {% if refers['newsletter']['image_url'] %}
+    {% set has_image = refers['more']['image_url'] %}
+  {% endif %}
+
+  {{  refer(refers['newsletter']['headline'], 
+      refers['newsletter']['text'], 
+      refers['newsletter']['button_url'], 
+      refers['newsletter']['button_text'], 
+      has_image=has_image,
+      add_class=add_class) }}
+
+{% endmacro %}
+
+{% macro seclusion_pp_refer(alignment=False, add_class="") %}
+  {% if alignment %}  
+    {% set add_class = add_class ~ " refer--" ~ alignment%}
+  {% endif %}
+  
+  {% set has_image = False %}
+  {% if refers['pp_newsletter']['image_url'] %}
+    {% set has_image = refers['more']['image_url'] %}
+  {% endif %}
+
+  {{  refer(refers['pp_newsletter']['headline'], 
+      refers['pp_newsletter']['text'], 
+      refers['pp_newsletter']['button_url'], 
+      refers['pp_newsletter']['button_text'], 
+      has_image=has_image,
+      add_class=add_class) }}
+
+{% endmacro %}
+
+{% macro follow_refer(alignment=False, add_class="") %}
+  {% if alignment %}  
+    {% set add_class = add_class ~ " refer--" ~ alignment%}
+  {% endif %}
+  
+  {% set has_image = False %}
+  {% if refers['follow']['image_url'] %}
+    {% set has_image = refers['more']['image_url'] %}
+  {% endif %}
+
+  {{  refer(refers['follow']['headline'], 
+      refers['follow']['text'], 
+      refers['follow']['button_url'], 
+      refers['follow']['button_text'], 
+      has_image=has_image,
+      add_class=add_class) }}
+
+{% endmacro %}
+
+
+{% macro add_date_published(pub, mod) %}
+  <div class='pub-date'>
+
+    {% if pub >= mod %}
+      {# If the mod date is the same as pub date, then there have been no updates #}
+      <meta itemprop="datePublished" datetime="{{ pub|xldate_to_datetime }}" content="{{ pub|xldate_to_datetime }}">
+      <time itemprop="dateModified" datetime="{{ mod|xldate_to_datetime }}"content="{{ mod|xldate_to_datetime }}">PUBLISHED: {{ mod|xldate_to_datetime|format_date_with_strftime("%B %-d, %Y") }}</time>
+
+    {% else %}
+      {# The the mod date is after the pub date, then there have been updates. #}
+      <meta itemprop="datePublished" datetime="{{ pub|xldate_to_datetime }}" content="{{ pub|xldate_to_datetime }}">
+      <time itemprop="dateModified" datetime="{{ mod }}"content="{{ mod|xldate_to_datetime }}">UPDATED: {{ mod|xldate_to_datetime|format_date_with_strftime("%B %-d, %Y") }}</time>
+
+    {% endif %}
+
+  </div>
+{% endmacro %}
+
+{% macro add_bylines(bylines, byline_email) %}
+  <div class='bylines'>
+    <p itemprop="author creator"> By 
+        <a href="mailto:{{ byline_email }}" target="_blank" rel="noopener">
+          <span itemtype="http://schema.org/Person" itemscope="">{{bylines}}</span></a>
+    </p>
+  </div>
+{% endmacro %}
+
+{% macro breaker(text, num=False) %}
+  {% if num %}
+    {# <div class='breaker breaker--{{ num }}'> #}
+      <h3>{{ text }}</h3>
+    {# </div> #}
+  {% else %}
+    <h3>{{ text }}</h3>
+  {% endif %}
+{% endmacro %}
+
+{% macro photo_arr(design_str, p2p_collection_slug_str, image_width, display_caption_bool, display_credit_bool, add_class_str, override_caption, group_hed, group_intro) %}
+  <div class='photo-arr photo-arr--{{ design_str }} {{ add_class_str }}'>
+  {% if group_hed %}
+    <div class='photo-arr--intro'>
+      <h4>{{ group_hed }}</h4>
+      <p>{{ group_intro }}</p>
+    </div>
+  {% endif %}
+  {% if design_str|int == 0 %}
+    {# ZERO means a gallery #}
+    {{ gallery(p2p_collection_slug_str, display_caption_bool, display_credit_bool, image_width) }}
+  {% else %}
+    {# OTHERWISE WE'LL JUST USE CSS TO ARRANGE THE PHOTOS #}
+    {% set limit = design_str|get_photo_limit %}
+    {% for img in get_p2p_content_item(p2p_collection_slug_str)['related_items'][0:limit] %}
+      {{ add_p2p_photo(img['slug'], "image--lazy", image_width, display_caption_bool, display_credit_bool) }}
+    {% endfor %}
+  {% endif %}
+  {% if override_caption %}
+    <p class='photo-arr__override-caption'>{{ override_caption }}</p>
+  {% endif %}
+  </div>
+  {# {{ get_p2p_content_item(p2p_collection_slug_str) }} #}
+{% endmacro %}
+
+
+{% macro gallery(slug, show_caption_bool, show_credit_bool, image_width) %}
+  {# TODO: Make photo size respect the river #}
+  <div class="swiper-container">
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+      {% for img in get_p2p_content_item(slug)['related_items'] %}
+        {% if show_caption_bool %}
+          {% set caption = img.content_item.caption %}
+        {% else %}
+          {% set caption = False %}
+        {% endif %}
+
+        {% if show_credit_bool %}
+          {% set credit = img.content_item.credit %}
+        {% else %}
+          {% set credit = False %}
+        {% endif %}
+
+        <div class="swiper-slide">
+          {{ add_p2p_photo(img['slug'], "", image_width, caption, credit, True) }}
+          {# <div class="swiper-lazy-preloader"></div> #}
+        </div>
+      {% endfor %}
+    </div>
+    <!-- If we need pagination -->
+    <div class="swiper-pagination"></div>
+    
+    <!-- If we need navigation buttons -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+    
+    <!-- If we need scrollbar -->
+    {# <div class="swiper-scrollbar"></div> #}
+</div>
+{% endmacro %}
+
+{% macro aside(aside_type, add_class) %}
+    {% set refer_content = refers[aside_type] %}
+    
+    {% if aside_type == 'subscribe' or aside_type == "respond" %}
+      {% set refer_url = refer_content["url"]|process_text|e %}
+    {% else %}
+      {% set refer_url = "//" + ROOT_URL + "/" + refer_content["url"]|process_text()|e %}
+    {% endif %}
+
+    
+
+    <aside class='refer refer--{{ aside_type }} {% if add_class %} {{ add_class }} {% endif %}'>
+        <h3 class='refer__headline'>{{ refer_content["headline"]|dumb_to_smart_quotes|process_text() }}</h3>
+        {% if refer_content["text"]%}
+        <p class='refer__text'>{{ refer_content["text"]|dumb_to_smart_quotes|process_text() }}</p>
+        {% endif %}
+        {% if  refer_content["button_url"] and refer_content["button_text"] %}
+            <a class='refer__button' href='{{ refer_content["button_url"]|process_text() }}' target="_blank" rel="noopener">{{ refer_content["button_text"]|process_text() }}</a>
+        {% endif %}
+    </aside>
+{% endmacro %}
+
+{% macro add_p2p_photo(slug, add_class, width, display_caption, display_credit, dont_lazy_load=False) %}
+  {% set photo = get_p2p_content_item(slug) %}
+
+  {% if photo|check_if_is_okay_to_publish(BUCKET_NAME) %}
+  
+    {% set caption = "" %}
+    
+    {% if not display_caption and display_credit %}
+      {% set add_class = add_class + " image--credit-only" %}
+    {% endif %}
+
+    {% if display_caption or display_credit %}
+      {% set caption = caption + "<figcaption>" %}
+    {% endif %}
+    
+    {% if display_caption %}
+      {% set caption = caption + photo.caption|striptags|strip_whitespace %}
+    {% endif %}
+
+
+    {% if display_credit %}
+      {% set credit = photo.credit|striptags|strip_whitespace %}
+    {% endif %}
+
+    {% if display_credit and display_caption %}
+      {% set caption = caption + " (" + credit + ")" %}
+    {% elif display_credit and not display_caption %}
+      {% set caption = caption + credit %}
+    {% endif %}
+
+    {% if display_caption or display_credit %}
+      {% set caption = caption + "</figcaption>" %}
+    {% endif %}
+
+    {% set photo_services_url = photo.photo_services_url.replace('http:', '').replace('https:', '') %}
+
+    {% if dont_lazy_load %}
+      {# {% set src = "src=\'" ~ photo.photo_services_url ~ "/" ~ width ~ "\'" %} #}
+      {% set src = "{}/{}".format(photo_services_url, width) %}
+      {% set full_res_src = False %}
+    {% else %}
+      {% set src = "{}/{}".format(photo.photo_services_url, 10) %}
+      {% set full_res_src = "{}/{}".format(photo_services_url, width) %}
+      {% set add_class = add_class ~ " image--lazy" %}
+    {% endif %}
+
+      <figure class='image {{ add_class }}'>
+        <img {% if full_res_src %}data-full-res-src="{{ full_res_src }}"{% endif %} src="{{ src|process_text() }}" alt='{{ photo.title }}' title='{{ photo.title }}'/>
+        {{ caption|process_text() }}
+        <p class='debug-slug'>Image p2p slug: {{ slug }}</p>
+      </figure>
+    {% else %}
+      <p style='padding:20px;background:red; color:yellow'>Photo (slug: {{ slug }}) is not set to "live"</p>  
+    {% endif %}
+{% endmacro %}
+
+{% macro ad(type, alignment, add_class=False) %}
+    {# returns an advert <div> with the proper alignment classes and data-* attributes to make it fit within this project. #}
+    {% if alignment %}
+        {% set class = "advert--" + alignment %}
+    {% endif %}
+
+    {% if add_class %}
+        {% set class = class ~ " " ~ add_class %}
+    {% endif %}
+    
+    {% if type == "cube" %}
+        <aside class="advert {{ class }}" data-ad-type="shrinky-cube"></aside>
+    {% elif type == "leaderboard" or type == "banner" %}
+        <aside class="advert" data-ad-type="leaderboard"></aside>
+    {% endif %}
+{% endmacro %}
+
+{% macro pullquote(quote_text, quote_attribution, quote_attribution_secondary, add_class=False) %}
+    <figure class="pullquote {% if add_class %} {{ add_class }}{% endif %}">
+        <blockquote>{{ quote_text|dumb_to_smart_quotes|process_text() }}</blockquote>
+        {% if quote_attribution %}
+            <figcaption>
+                {{ quote_attribution|process_text() }}
+                {% if quote_attribution_secondary|process_text() %}<span>{{ quote_attribution_secondary|process_text() }}</span>{% endif %}
+            </figcaption>
+        {% endif %}
+    </figure>
+    
+{% endmacro %}
+
+{% macro specialquote(quote_text, quote_time, quote_loc, quote_text_2, add_class=False) %}
+  <div class="special-quote {% if add_class %} {{ add_class }}{% endif %}">
+    <div class='quote-info'>
+      <p>{{quote_time}}</p>
+      <p>{{quote_loc}}</p>
+    </div>
+    <blockquote>{{ quote_text|dumb_to_smart_quotes|process_text() }}</blockquote>
+    {% if quote_text_2 %}
+    <blockquote>{{ quote_text_2|dumb_to_smart_quotes|process_text() }}</blockquote>
+    {% endif %}
+  </div>
+
+{% endmacro %}
+
+{% macro graphic(id, addon_class, url) %}
+    {% if addon_class %}
+        {% set class = addon_class %}
+    {% else %}
+        {% set class = "" %}
+    {% endif %}
+    <div class='chart chart--{{ id }} {{ class }}'>      
+        <div id='{{ id }}' class='graphic-embed' data-iframe-url='{{ url }}'></div>
+    </div>
+{% endmacro %}
+
+{% macro add_video(header=false, video_slug, add_class=False) %}
+    {% set video = get_p2p_content_item(video_slug) %}
+
+   <div class='video {% if add_class %} {{ add_class }}{% endif %}'>
+      {% if header %}
+        <h4 class='video__headline'>{{ header }}</h4>
+      {% endif %}
+       <div class='video__wrapper'>
+          <video data-account="3690581440001"
+            data-player="S1vBkbMfe"
+            data-embed="default"
+            data-video-id="ref:{{ video['id'] }}"
+            data-application-id
+            tabindex="-1" 
+            class="video-js"
+            controls></video>
+      </div>
+    </div>
+{% endmacro %}
+
+{% macro add_author(name, email) %}
+  <span itemprop="author"><a {% if email %}href="mailto:{{- email -}}?subject=Regarding: {{ title }}"{% endif %}><span itemprop="name">{{- name -}}</span></a></span>
+{% endmacro%}
+
+{% macro video_portrait (video_file, caption, caption_style, add_class=False) %}
+  <figure class='image image__video {{ caption_style }} {{add_class}}'>
+    <video class='video_portrait lazyvideo' muted autoplay loop playsinline poster='//{{ROOT_URL}}/img/poster/{{video_file}}.png'>
+      {# <source data-src='//{{ROOT_URL}}/video/{{ video_file }}.webm' type='video/webm'> #}
+      <source data-src='//{{ROOT_URL}}/video/{{ video_file }}.mp4' type='video/mp4'>
+      <source data-src='//{{ROOT_URL}}/img/poster/{{video_file}}.png' type='image/png'>
+    </video>
+    <figcaption>{{ caption }}</figcaption>
+  </figure>
+{% endmacro %}
+
+{% macro add_photo(url, alt, add_class=False, caption=False, credit=False) %}
+  <figure class='image {{ add_class }}'>
+    <img src='{{ url }}' alt='{{ alt }}'/>
+    {% if caption or credit %}
+      <figcaption>
+        {% if caption%}{{ caption }}{% endif %} {% if caption%}({{ credit }}){% endif %}
+      </figcaption>
+    {% endif %}
+  </figure>
+{% endmacro %}
+
+{% macro add_document (id, add_class=False) %}
+  {% for document in documents if id == document.id %}
+  <div class='document-wrapper{% if add_class %} {{add_class}}{% endif %}'>
+    {% if document.hed %}<h4>{{document.hed}}</h4>{% endif %}
+    {% if document.intro %}{{document.intro|markdown}}{% endif %}
+      <figure class='trib-image document-container'>
+      <img class='doc-thmb' src='//{{ROOT_URL}}/img/documents/{{document.id}}_750.png?w=750' data-zoom='//{{ROOT_URL}}/img/documents/{{document.id}}_1200.png?w=1200'>
+      <div class='doc-detail'></div>
+      <div class='hover-label'>
+        <p>
+          <span class='magnify-icon'>
+            <img src='//{{ROOT_URL}}/img/icon/magnify.svg'>
+          </span>
+          Hover/tap to zoom
+        </p>
+      </div>
+      {% if document.caption %}<figcaption>{{document.caption}} ({{document.credit}})</figcaption>
+      {% endif %}
+    </figure>
+  </div>
+  {% endfor %}
+{% endmacro %}
+
+{% macro add_document_arr (design, id_1, id_2, id_3, id_4, add_class=False) %}
+  <div class='document_arr document_arr__{{design}} {{ add_class }}'>
+    {{ add_document (id_1) }}
+    {{ add_document (id_2) }}
+    {% if id_3 %}
+        {{ add_document (id_3) }}
+    {% endif %}
+    {% if id_4 %}
+        {{ add_document (id_4) }}
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% macro add_project_photo(id, add_class=False) %}
+    <figure class='image image--lazy{% if add_class %} {{add_class}} {% endif %}'>
+    {% for photo in captions if id == photo.id %}
+      <img src='//{{ROOT_URL}}/img/{{ photo.id }}.jpg'>
+      {% if photo.caption %}
+      <figcaption>
+        {{photo.caption}} {% if photo.credit %}({{photo.credit}}){% endif %}
+      </figcaption>
+      {% endif %}
+    {% endfor %}
+    </figure>
+{% endmacro %}
+
+{% macro seclusion_breaker (content, add_class="true") %}
+  <div class='seclusion_breaker {% if add_class %}{{add_class}}{%endif%}'>
+    <hr>
+    <img src='//{{ROOT_URL}}/img/icon/door.svg'>
+    <h2>{{content}}</h2>
+  </div>
+{% endmacro %}
+
+
+
+

@@ -1,0 +1,31 @@
+<script type="text/javascript">
+	function toggleBurger(){
+		document.querySelector('.burger').classList.toggle('burger--active')
+	}
+</script>
+
+<nav class='navbar'>
+	<div class='container'>
+	    <button id='nav-toggle' type="button" class="navbar__toggle" onclick=" document.querySelector('.navbar__burger.burger').classList.toggle('burger--visible');">
+	    	<span class='navbar__toggle-flex'>
+		        <span class="sr-only">Toggle navigation</span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+	    	</span>
+	    </button>
+    	<div class='navbar__menu'></div>
+        <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+        	<a href="http://troncads.com/land-enews-onsite-2col/?market=ct&source=index&int=nav2" class="navbar__subscribe">Subscribe</a>
+    	  	<a href="https://www.chicagotribune.com" itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+    	  		<meta itemprop="url" content="https://www.chicagotribune.com" />
+				<svg viewbox="0 0 170 30" title='Chicago Tribune' alt='Chicago Tribune logo'>
+					<use xlink:href="#chicago-tribune-logo" />
+				</svg>
+		    </a>
+      		<meta itemprop="name" content="Chicago Tribune">
+    	</div>
+	{% include "base-subtemplates/_hamburger-nav.html" %}
+	</div>
+</nav>

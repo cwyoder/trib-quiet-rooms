@@ -1,0 +1,35 @@
+.comments-wrapper{
+	border-bottom: 4px solid $comments-button-color;
+	padding:#{$grid-gap} 0 #{$grid-gap / 2} 0;
+}
+
+
+#comments-button{
+	@include sans-serif-text(14px, 1em, normal);
+	color: $comments-button-text-color;
+	background:transparent;
+	border: 1px solid $comments-button-color;
+	border-radius: 10px;
+	cursor: pointer;
+
+	display:block;
+	padding: #{$grid-gap / 2} 0;
+	margin: 0 auto #{$grid-gap / 2} auto;
+	width: 100%;
+	max-width: 150px;
+
+	
+	transition: all 150ms ease;
+	&:hover, &:focus{
+		background: $comments-button-color;
+		color:set-text-color($comments-button-color, true);
+		transition: all 150ms ease;
+	}
+}
+
+.trb_cm_so[data-role="cm_container"]{
+	max-height:0;
+	transition: max-height 400ms ease;
+	box-sizing: border-box;
+	padding: 0 #{$grid-gap / 2};
+}

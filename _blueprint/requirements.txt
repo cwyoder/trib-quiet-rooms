@@ -1,0 +1,5 @@
+git+https://github.com/newsapps/p2p-python.git#egg=p2p-tribune
+git+https://github.com/newsapps/python-tribune-omniture.git#egg=tribune_omniture
+git+https://tribune.unfuddle.com/git/tribune_python-tribune-viztools/@0.9.4#egg=tribune_viztools
+smartypants==1.8.2
+Pillow==5.0.0

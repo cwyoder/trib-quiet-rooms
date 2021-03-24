@@ -1,0 +1,14 @@
+<header class='seclusion-header'>
+	<figure class='header-img'>
+		<img src='//{{ROOT_URL}}/img/seclusion-header-img.jpg'>
+		<figcaption>This is the caption</figcaption>
+	</figure>
+	<div class='headline-container'>
+		<h1>{{main_hed|upper}}</h1>
+		<h2>{{main_deck}}</h2>
+		<p class='bylines'>By XXXXXX</p>
+		<p class='underline'>Chicago Tribune, in partnership with Propublica</p>
+		<meta itemprop="datePublished" datetime="{{ date_published|xldate_to_datetime }}" content="{{ date_published|xldate_to_datetime }}">
+		<time itemprop="dateModified" datetime="{{ date_modified }}"content="{{ date_modified|xldate_to_datetime }}">PUBLISHED: {{ date_modified|xldate_to_datetime|format_date_with_strftime("%B %-d, %Y") }}</time>
+	</div>
+</header>

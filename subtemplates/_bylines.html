@@ -1,0 +1,9 @@
+<div class='bylines'>
+	<p class='by'>{{writers}}</p>
+	<p class='photog'>{{photog}}</p>
+	<meta itemprop="datePublished" datetime="{{ date_published|xldate_to_datetime }}" content="{{ date_published|xldate_to_datetime }}">
+	<time itemprop="dateModified" datetime="{{ date_modified }}"content="{{ date_modified|xldate_to_datetime }}">PUBLISHED: NOVEMBER 19, 2019</time>
+	<div class='bylines-note'>
+		{{bylines_note|markdown}}
+	</div>
+</div>

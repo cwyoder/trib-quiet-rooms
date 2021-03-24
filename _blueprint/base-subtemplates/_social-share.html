@@ -1,0 +1,43 @@
+{% macro social_icon(network) %}
+	<li class='network network--{{ network.slug|lower }}'>
+		<a rel="noopener" target="_blank" href="{{ network.url }}" aria-label="Share this on {{ network.network }}">
+			<svg class='network__icon' viewbox="0 0 30 30">
+				<use xlink:href="#{{ network.slug|lower }}"/>
+			</svg>
+			<span class="sr-only">Share this on {{ network.network }} </span>
+		</a>
+	</li>
+{% endmacro %}
+
+{# %23 is the url-encoded hash tag #}
+
+{% set target_url = 'http://' + ROOT_URL + '/' + PATH %}
+
+{% set networks = {
+	"facebook":{
+		"network":"Facebook",
+		"url":"http://www.facebook.com/sharer.php?u=" + target_url,
+		"slug":"facebook"
+	},
+	"twitter":{
+		"network":"Twitter",
+		"url":"http://twitter.com/share?url=" + target_url + "&text=" + twitter_tweet|urlencode,
+		"slug":"twitter"
+	},
+	"email":{
+		"network":"Email",
+		"url":"mailto:?subject=" ~ opengraph_title ~ "&body=" ~ opengraph_description ~ " " ~ target_url,
+		"slug":"email"
+	}
+}%}
+
+
+<ul class='social-networks social-networks--share'>
+	{% if twitter_title and twitter_description and twitter_tweet %}
+		{{ social_icon(networks['twitter']) }}		
+	{% endif %}
+	{% if opengraph_title and opengraph_description %}
+		{{ social_icon(networks['facebook']) }}		
+		{{ social_icon(networks['email']) }}		
+	{% endif %}	
+</ul>

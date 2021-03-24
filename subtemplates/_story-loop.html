@@ -1,0 +1,283 @@
+{% from './subtemplates/_macros.html' import graphic as graphic with context%}
+{% from './subtemplates/_macros.html' import add_photo as add_photo with context %}
+{% from './subtemplates/_macros.html' import add_p2p_photo as add_p2p_photo with context %}
+{% from './subtemplates/_macros.html' import ad as ad  with context %}
+{% from './subtemplates/_macros.html' import add_video as add_video with context %}
+{% from './subtemplates/_macros.html' import pullquote as pullquote with context%}
+{% from './subtemplates/_macros.html' import aside as aside with context%}
+{% from './subtemplates/_macros.html' import photo_arr as photo_arr with context%}
+{% from './subtemplates/_macros.html' import video_portrait as video_portrait with context%}
+{% from './subtemplates/_macros.html' import add_project_photo as add_project_photo with context%}
+{% from './subtemplates/_macros.html' import seclusion_breaker as seclusion_breaker with context %}
+{% from './subtemplates/_macros.html' import specialquote as specialquote with context %}
+{% from './subtemplates/_macros.html' import add_document as add_document with context %}
+{% from './subtemplates/_macros.html' import add_document_arr as add_document_arr with context %}
+{% from './subtemplates/_macros.html' import seclusion_subscribe_refer as seclusion_subscribe_refer with context%}
+{% from './subtemplates/_macros.html' import seclusion_sidebar_refer as seclusion_sidebar_refer with context%}
+{% from './subtemplates/_macros.html' import seclusion_methodology_refer as seclusion_methodology_refer with context%}
+{% from './subtemplates/_macros.html' import seclusion_fetcher_refer as seclusion_fetcher_refer with context%}
+{% from './subtemplates/_macros.html' import seclusion_newsletter_refer as seclusion_newsletter_refer with context%}
+{% from './subtemplates/_macros.html' import seclusion_pp_refer as seclusion_pp_refer with context%}
+{% from './subtemplates/_macros.html' import follow_refer as follow_refer with context%}
+
+
+
+
+{% if s.close_river|upper == "TRUE" %}
+    {% set close_river = True %}
+{% else %}
+    {% set close_river = False %}
+{% endif  %}
+
+{% if close_river %}
+    </div>
+{% endif %}
+
+{# Look for any add_class #}
+{% if s.add_class %}
+    {% set add_class = s.add_class %}
+{% else %}
+    {% set add_class = "" %}
+{% endif %}
+
+{# We'll compare the type #}
+{% set type = s.type %}
+
+{% if type == "text" %}     
+    {% if add_class %}<div class='{{ add_class }}'>{% endif %}
+    {{ s.content|markdown|find_inline_link|trim }}
+    {% if add_class %}</div>{% endif %}
+    
+{% elif type == "graphic" and s.graphic_id and s.url %}
+
+    {{ graphic(s.graphic_id, add_class, s.url) }}
+
+{% elif type == "photo" and s.url and s.alt %}
+    {% if s.caption %}
+        {% set caption = s.caption %}
+    {% else %}
+        {% set caption = False %}
+    {% endif %}
+
+    {% if s.credit %}
+        {% set credit = s.credit %}
+    {% else %}
+        {% set credit = False %}
+    {% endif %}
+
+    {{ add_photo(s.url, s.alt, add_class, caption, credit) }}
+
+{% elif type == "advert" and s.ad_type and s.ad_alignment %}
+
+    {{ ad(s.ad_type, s.ad_alignment, add_class=add_class) }}
+
+{% elif type == "video" and s.video_slug %}
+
+    {% if s.header %}
+        {% set header = s.header %}
+    {% else %}
+        {% set header = False %}
+    {% endif %}
+
+    {{ add_video(header, s.video_slug, add_class) }}
+
+{% elif type == "pullquote" and s.quote_text and s.quote_attribution %}
+
+    {% if s.quote_attribution_secondary %}
+        {% set quote_attribution_secondary = s.quote_attribution_secondary %}
+    {% else %}
+        {% set quote_attribution_secondary = "" %}
+    {% endif %}
+
+    {{ pullquote(s.quote_text, s.quote_attribution, quote_attribution_secondary, add_class) }}
+
+{% elif type == "quote_special" and s.quote_text and s.timestamp and s.locstamp %}
+    
+
+    {% if s.quote_text_2 %}
+        {% set quote_text_2 = s.quote_text_2 %}
+    {% else %}
+        {% set quote_text_2 = "" %}
+    {% endif %}
+
+    {{ specialquote(s.quote_text, s.timestamp, s.locstamp, quote_text_2, add_class) }}
+
+
+{% elif type == "p2p_photo" and s.slug %}
+
+    {% if s.close_river|upper == TRUE or s.close_river|upper == "TRUE" %}
+        {% set width = 1200 %}
+    {% else %}
+        {% set width = 650 %}
+    {% endif %}
+
+    {% if s.display_caption == false or s.display_caption|upper == "FALSE" %}
+        {% set display_caption = False %}
+    {% else %}
+        {% set display_caption = True %}
+    {% endif %}
+
+    {% if s.display_credit == false or s.display_credit|upper == "FALSE" %}
+        {% set display_credit = False %}
+    {% else %}
+        {% set display_credit = True %}
+    {% endif %}
+
+    {% if s.dont_lazy_load == True or s.dont_lazy_load|upper == "TRUE" %}
+        {% set dont_lazy_load = True %}
+    {% else %}
+        {% set dont_lazy_load = False %}
+    {% endif %}
+
+    {{ add_p2p_photo(s.slug|trim, add_class, width, display_caption, display_credit, dont_lazy_load) }}
+
+{% elif type|upper == "PHOTO" and s.id %}
+
+    {% if s.close_river|upper == TRUE or s.close_river|upper == "TRUE" %}
+        {% set width = 1200 %}
+    {% else %}
+        {% set width = 650 %}
+    {% endif %}
+
+    {{ add_photo_new(s.id, add_class, width) }}
+
+
+{% elif type|upper == "REFER" %}
+    
+    {% if s.add_class %}
+        {% set add_class = s.add_class %}
+    {% else %}
+        {% set add_class = "" %}
+    {% endif %}
+    
+    {{ aside(s.content, add_class) }}
+
+{% elif type|upper == "BREAKER" and s.content %}
+    {{ seclusion_breaker(s.content, add_class)}}
+
+{% elif type == "photo_arr" %}
+
+    {% if s.close_river|upper == TRUE or s.close_river|upper == "TRUE" %}
+        {% set width = 1200 %}
+    {% else %}
+        {% set width = 650 %}
+    {% endif %}
+
+    {% if s.override_caption %}
+        {# If there is an override caption, then let it override the captions and credit #}
+        {% set override_caption = s.override_caption %}
+        {% set display_caption = False %}
+        {% set display_credit = False %}
+    
+    {% else %}
+        {# If there is no override caption, then decide about the other elements #}
+        {% set override_caption = False %}
+        
+        {% if s.display_caption == false or s.display_caption|upper == "FALSE" %}
+            {% set display_caption = False %}
+        {% else %}
+            {% set display_caption = True %}
+        {% endif %}
+
+        {% if s.display_credit == false or s.display_credit|upper == "FALSE" %}
+            {% set display_credit = False %}
+        {% else %}
+            {% set display_credit = True %}
+        {% endif %}
+
+    {% endif %}
+    {% if s.design and s.slug %}
+        {{ photo_arr(s.design, s.slug, width, display_caption, display_credit, add_class, override_caption, s.group_hed, s.group_intro)}}
+    {% endif %}
+
+{% elif type|upper == "INCLUDE" %}
+    {% if s.content %}
+        {# If the content attribute is filled out, then include the referenced file. #}
+        {% include s.content %}
+    {% endif %}     
+
+{% elif type|upper == "VIDEO_PORTRAIT" and s.video_file and s.caption and s.caption_style %}
+
+    {{ video_portrait(s.video_file, s.caption, s.caption_style, add_class) }}
+
+{% elif type|upper == "DOCUMENT" and s.id %}
+
+    {{ add_document(s.id, add_class) }}
+
+{% elif type|upper == "DOCUMENT_ARR" and s.design and s.id_1 %}
+    
+    {{ add_document_arr(s.design, s.id_1, s.id_2, s.id_3, s.id_4, add_class) }}
+
+{% elif type|upper == "SUBSCRIBE_REFER" %}
+
+        {% if s.alignment %}
+            {% set alignment = s.alignment %}
+        {% else %}
+            {% set alignment = False %}
+        {% endif %}
+        {{ seclusion_subscribe_refer(alignment, add_class) }}
+
+{% elif type|upper == "SIDEBAR_REFER" %}
+
+        {% if s.alignment %}
+            {% set alignment = s.alignment %}
+        {% else %}
+            {% set alignment = False %}
+        {% endif %}
+        {{ seclusion_sidebar_refer(alignment, add_class) }}
+
+{% elif type|upper == "METHOD_REFER" %}
+
+        {% if s.alignment %}
+            {% set alignment = s.alignment %}
+        {% else %}
+            {% set alignment = False %}
+        {% endif %}
+        {{ seclusion_methodology_refer(alignment, add_class) }}
+
+{% elif type|upper == "FETCHER_REFER" %}
+
+        {% if s.alignment %}
+            {% set alignment = s.alignment %}
+        {% else %}
+            {% set alignment = False %}
+        {% endif %}
+        {{ seclusion_fetcher_refer(alignment, add_class) }}
+
+{% elif type|upper == "NEWSLETTER_REFER" %}
+
+        {% if s.alignment %}
+            {% set alignment = s.alignment %}
+        {% else %}
+            {% set alignment = False %}
+        {% endif %}
+        {{ seclusion_newsletter_refer(alignment, add_class) }}
+
+{% elif type|upper == "PP_REFER" %}
+
+        {% if s.alignment %}
+            {% set alignment = s.alignment %}
+        {% else %}
+            {% set alignment = False %}
+        {% endif %}
+        {{ seclusion_pp_refer(alignment, add_class) }}
+
+
+{% elif type|upper == "FOLLOW_REFER" %}
+
+        {% if s.alignment %}
+            {% set alignment = s.alignment %}
+        {% else %}
+            {% set alignment = False %}
+        {% endif %}
+        {{ follow_refer(alignment, add_class) }}
+
+
+{% endif %}
+
+{% if close_river %}
+    <div class='river'>
+{% endif %}
+
+
+

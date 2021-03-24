@@ -1,0 +1,28 @@
+.new-ad {
+	margin: 40px 0;
+
+	div {
+		margin: 0 auto;
+	}
+
+	&:before {
+    content: "Advertisement";
+    font: 12px/1em sans-serif;
+    color: #888;
+    text-align: center;
+    display: block;
+    margin-bottom: 5px;		
+	}
+}
+
+@media all and (min-width: $phablet-min-width){
+	// By default, this is 450px+
+	.new-ad__right {
+		float: right;
+		margin: 0 0 30px 30px;
+
+		div {
+			margin: 0;
+		}
+	}
+}

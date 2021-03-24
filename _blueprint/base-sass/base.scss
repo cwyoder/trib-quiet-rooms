@@ -1,0 +1,99 @@
+// Enables Tribune colors, but is required for everything.
+@import 'base-variables';
+@import 'base-config';
+
+// ---- ADD MORE VARIABLES HERE ---------------------------------------------
+
+
+
+// Required for everything, too, but can be broken down into smaller explicit imports if desired. 
+@import 'base-mixins';
+
+@import 'base-scaffolding';
+@import 'base-footer';
+@import 'base-navbar';
+@import 'base-social';
+@import 'base-byline';
+@import 'base-adverts';
+@import 'base-comments';
+@import 'base-call-to-action';
+@import 'base-hamburger';
+
+
+body{
+	margin: 0;
+}
+
+
+.sr-only{
+	// Use this to hide elements from everything except screen readers.
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+
+// TYPOGRAPHY
+
+p{
+	font: 15px/1.6em $serif-fonts;
+	margin: 0 0 #{$grid-gap / 2} 0;
+}
+
+a{
+	color: $color-links;
+	text-decoration: none;
+
+	&:hover{
+		text-decoration: underline;
+	}
+}
+
+
+#credits, .credits {
+	p{
+		@include agate();
+	}
+}
+
+// This is the paywall/meter/registration sticky note at the bottom of the page
+.met-flyout .met-promo-content{
+	p {
+		line-height: 1.3em;
+		font-family: "Arial", sans-serif;
+		span{
+			font: 14px/1.3em "Arial", sans-serif;
+			color:white;
+			width:100%;
+			margin: 0;
+
+			&:first-of-type{
+				font-weight: 700;
+			}
+
+			a {
+				font: 14px/1.3em "Arial", sans-serif !important;
+				
+			}
+		}
+	}
+}
+
+@media all and (min-width: $phablet-min-width){
+	p{
+		font-size: 18px;
+		line-height: 1.5em;
+	}
+}
+
+@media all and (min-width: $tablet-min-width){
+	// ONLY CHANGES FOR TABLETS + DESKTOPS	
+}
+
+@media all and (min-width: $desktop-min-width){
+	// ONLY CHANGES FOR DESKTOPS
+}

@@ -1,0 +1,273 @@
+{# This is the canonical url #}
+{% set url = "//" ~ ROOT_URL ~ "/" ~ PATH %}
+
+{# Useful macros #}
+{% from 'base-subtemplates/_macros.html' import add_byline as add_byline with context %}
+{% from 'base-subtemplates/_macros.html' import refer as refer with context %}
+{% from 'base-subtemplates/_macros.html' import keep_scrolling as keep_scrolling with context %}
+<!DOCTYPE html>
+<html lang="en" xml:lang="en">
+<head>
+    {% block meta scoped %}
+        <meta charset="UTF-8" />
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="fb:app_id" content="306836229411287">
+        <meta name="google-site-verification" content="TKTKTK">
+    {% endblock meta %}
+
+    {% block prefetch %}
+        {% if BUCKET_NAME and (BUCKET_NAME|lower == "staging" or BUCKET_NAME|lower == "production") %}
+        <link rel="dns-prefetch" href="//static.chartbeat.com">
+        <link rel="dns-prefetch" href="//www.google-analytics.com">
+        <link rel="dns-prefetch" href="//ssor.tribdss.com">
+        <link rel="dns-prefetch" href="//www.tribdss.com">
+        {% block google_fonts_prefetch %}
+            <link rel="dns-prefetch" href="https://fonts.gstatic.com/" crossorigin>
+        {% endblock google_fonts_prefetch %}
+        {% else %}
+            <!-- PREFETCHES NOT LOADED -->
+        {% endif %}
+    {% endblock prefetch %}
+
+    {% block canonical %}<link rel="canonical" href="{{ url }}" />{% endblock canonical %}
+    {% block title %}<title>{{ title }} - Chicago Tribune</title>{% endblock title %}
+    {% block favicon %}<link rel="shortcut icon" href="img/favicon.ico" />{% endblock %}
+
+
+
+    {% block preconnect %}
+        {% if BUCKET_NAME and (BUCKET_NAME|lower == "staging" or BUCKET_NAME|lower == "production") %}
+        <link rel="preconnect" href="https://www.google-analytics.com">
+        {% else %}
+            <!-- PRE-CONNECTS NOT LOADED -->
+        {% endif %}
+    {% endblock preconnect %}
+
+
+    {% block preload %}
+    {% endblock preload %}
+
+    {% block stylesheets %}
+    {% endblock stylesheets %}
+
+    {% block structured_data_meta scoped %}
+        {# METS/STRUCTURED DATA #}
+        <meta name="description" content="{{ opengraph_description }}" />
+        {# <meta name="keywords" content="{{ seo_keywords }}" /> #}
+        <meta name="author" content="Chicago Tribune" />
+        {% if thumbnail_image %}
+            <meta property="image" content="//{{ ROOT_URL}}/{{ thumbnail_image }}" />
+        {% endif %}
+    {% endblock structured_data_meta %}
+    
+    {% block published_date %}
+        <meta property="article:published_time" content="{{ date_published|xldate_to_datetime }}" />
+        <meta property="article:modified_time" content="{{ date_modified|xldate_to_datetime }}" />
+    {% endblock published_date %}
+
+    {% if thumbnail_image %}
+    {#  This gets the image dimensions and  #}
+    {% set thumbnail = thumbnail_image|get_thumbnail_info %}
+    {% endif %}
+
+    {% block opengraph scoped %}
+        {# OPENGRAPH #}
+        <meta property="og:url" content="//{{ ROOT_URL }}/{{ PATH }}" />
+        <meta property="og:type" content="article" /> 
+        <meta property="og:title" content="{{ opengraph_title }}" />
+        <meta property="og:description" content="{{ opengraph_description }}" />
+        <meta property="og:image" content="http://{{ ROOT_URL}}/{{ thumbnail_image }}" />
+        {% if thumbnail_image %}
+        <meta name="og:image:alt" content="{{ thumbnail_alt }}" />
+        <meta name="og:image:height" content="{{ thumbnail.height }}px" />
+        <meta name="og:image:width" content="{{ thumbnail.width }}px" />
+        {% endif %}
+    {% endblock opengraph %}
+
+    {% block twitter scoped%}
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@chicagotribune" />
+        <meta name="twitter:title" content="{{ twitter_title }}" />
+        <meta name="twitter:description" content="{{ twitter_description }}" />
+        {% if thumbnail_image %}
+        <meta name="twitter:image" content="http://{{ ROOT_URL}}/{{ thumbnail_image }}" />
+        <meta name="twitter:image:alt" content="{{ thumbnail_alt }}" />
+        {% endif %}
+        <meta name="twitter:creator" content="@chicagotribune" />
+        <meta name="twitter:creator" content="@chitribgraphics" />
+    {% endblock twitter %}
+
+    {% block library_scripts %}{% endblock library_scripts %}
+    
+    {% block adverts %}
+        {# For the adverts #}
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="//media.apps.chicagotribune.com/ads/v2.1.4/ads.min.js" defer async></script>
+        <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+        <script>
+          window.googletag = window.googletag || {cmd: []};
+          googletag.cmd.push(function() {
+            googletag.defineSlot('/4011/trb.chicagotribune/news/data', [300, 250], 'div-gpt-ad-1573768033313-0').setTargeting('pos', ['1']).addService(googletag.pubads());
+            googletag.defineSlot('/4011/trb.chicagotribune/news/data', [300, 250], 'div-gpt-ad-1573768166557-0').setTargeting('pos', ['2']).addService(googletag.pubads());
+            googletag.defineSlot('/4011/trb.chicagotribune/news/data', [300, 250], 'div-gpt-ad-1573768220719-0').setTargeting('pos', ['3']).addService(googletag.pubads());
+            googletag.pubads().setTargeting('ptype', ['s']);
+            googletag.enableServices();
+          });
+        </script>
+
+    {% endblock adverts %}
+
+    {% block meter %}
+        {# Must come after jQuery #}
+        {# Will not load anything on local by the logic below. #}
+        {% if BUCKET_NAME and BUCKET_NAME == "staging" %}
+            {#  METER for Staging #}
+            <script src="//ssor.trb.stage.tribdev.com/reg/tribune/chinews-apps.min.js" async></script>
+            <script src="//www.dss.trb.stage.tribdev.com/meter/chinews-apps.min.js" async></script> 
+        {% elif BUCKET_NAME and BUCKET_NAME == "production" %}
+            {# METER for Production #}
+            <script src="//ssor.tribdss.com/reg/tribune/chinews-apps.min.js" async></script>
+            <script src="//www.tribdss.com/meter/chinews-apps.min.js" async></script>
+        {% else %}
+            <!-- METER NOT LOADED -->
+        {% endif %}
+    {% endblock meter %}
+    <script>
+        window.ROOT_URL = "//{{ ROOT_URL }}";
+    </script>
+    {% block omniture_config %}
+        {# OMNITURE but not if running locally #}
+        {% if BUCKET_NAME and (BUCKET_NAME|lower == "staging" or BUCKET_NAME|lower == "production") %}
+        <script type="text/javascript">
+            ((((window.trb || (window.trb = {})).data || (trb.data = {})).metrics || (trb.data.metrics = {})).thirdparty = {
+                    pageName: 'ct:apps:news:{% block omniture_page_name %}{{ name }}{% endblock omniture_page_name %}:articleproject.',
+                    channel: 'news',
+                    server: '{% block omniture_server %}graphics.chicagotribune.com{% endblock omniture_server %}',
+                    hier1: 'chicagotribune:news',
+                    hier2: 'news',
+                    prop1: 'D=pageName',
+                    prop2: 'news',
+                    prop38: 'articleproject',
+                    prop57: 'D=c38',
+                    prop59: '',
+                    eVar20: 'chicagotribune',
+                    eVar21: 'D=c38',
+                    eVar34: 'D=ch',
+                    eVar35: 'D=pageName',
+                    events:''
+            });  
+        </script>
+        {% else %}
+            <!-- OMNITURE NOT LOADED -->
+        {% endif %}
+    {% endblock omniture_config %}
+    {% block google_analytics %}
+        {% if BUCKET_NAME and (BUCKET_NAME|lower == "staging" or BUCKET_NAME|lower == "production") %}
+        {# <!-- Global site tag (gtag.js) - Google Analytics --> #}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-9792248-18"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-9792248-18');
+        </script>
+        {% else %}
+            <!-- GOOGLE ANALYTICS NOT LOADED -->
+        {% endif %}
+    {% endblock google_analytics %}
+</head>
+
+<body data-ad-path="{{ ad_path }}" {% block body_attr %}{% endblock body_attr %} data-ad-ptype="s" data-ad-iframe-url="./ad-iframe.html">
+    {% block sprites %}
+    <div style="display:none;height:0;visibility:invisible;">
+        {% include 'img/base-sprite.svg' ignore missing %}
+    </div>
+    {% endblock %}
+    {% block nav scoped%}{% include "base-subtemplates/_navbar.html" %}{% endblock %}
+
+    <article itemscope itemtype="//schema.org/NewsArticle">
+        {% block content %}{% endblock content %}
+    </article>
+    
+    {#
+        ## We don't do this no more -- RM ##
+    {% block comments %}
+        <!--Requires the meter to work, thus it will not load on local. -->
+        {% include 'base-subtemplates/_solid-opinion-comments.html' %}
+    {% endblock comments %} 
+    #}
+
+
+    {% block footer %}
+    <footer class='page-footer'>
+        {% include "base-subtemplates/_footer.html" %}
+    </footer>
+    {% endblock footer %}
+   
+    <meta itemprop="image" content="//{{ ROOT_URL }}/{{ thumbnail_image }}" />
+    
+    {#
+    {% if self.comments() %}
+    
+    <script>
+        document.getElementById('comments-button').addEventListener('click', function(e){
+            document.querySelector('#comments').classList.add('comments--open');
+            document.querySelector(`.trb_cm_so[data-role="cm_container"]`).style.maxHeight = "10000000vh";
+            (window.registration || (registration = [])).push('solidopinion');
+        }, false);
+    </script>
+    {% endif %}
+    #}
+    
+    {% block scripts %}{% endblock scripts %}
+
+    {% block chartbeat %}
+        {% if BUCKET_NAME and (BUCKET_NAME|lower == "staging" or BUCKET_NAME|lower == "production") %}
+        {# CHARTBEAT, but not if running locally #}
+        {# Inserts own <script> tag at end of <body> #}
+        <script type='text/javascript'>
+            var _sf_async_config = _sf_async_config || {};
+            var pageTitle = "{% block chartbeat_page_title %}{{ title }}{% endblock chartbeat_page_title %}";
+
+            _sf_async_config.uid = 25745 
+            _sf_async_config.domain = 'chicagotribune.com'; 
+            _sf_async_config.useCanonical = true;
+            _sf_async_config.sections = '{% block chartbeat_section %}Data, Dataviz{% endblock chartbeat_section %}'; 
+            _sf_async_config.authors = '{% block chartbeat_author %}Tribune Dataviz{% endblock chartbeat_author %}';
+            _sf_async_config.title = pageTitle;
+            
+            (function() {
+                function loadChartbeat() {
+                    var e = document.createElement('script');
+                    e.setAttribute('language', 'javascript');
+                    e.setAttribute('type', 'text/javascript');
+                    e.setAttribute('src', '//static.chartbeat.com/js/chartbeat.js');
+                    document.body.appendChild(e);
+                }
+                var oldonload = window.onload;
+                window.onload = (typeof window.onload != 'function') ?
+                    loadChartbeat : function() {
+                        oldonload();
+                        loadChartbeat();
+                    };
+            })();
+        </script>  
+        {% else %}
+            <!-- CHARTBEAT NOT LOADED -->
+        {% endif %}
+    {% endblock chartbeat %}
+
+    {% block omniture_scripts %}
+        {# OMNITURE but not if running locally. This also loads code needed for comments. #}
+        {% if BUCKET_NAME and (BUCKET_NAME|lower == "staging" or BUCKET_NAME|lower == "production") %}
+            <script src="//www.chicagotribune.com/thirdpartyservice?disablenav=true" async></script>
+        {% else %}
+            <!-- THIRD-PARTY SERVICES NOT LOADED -->
+        {% endif %}
+    {% endblock omniture_scripts %}
+
+  </body>
+</html>

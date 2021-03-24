@@ -1,0 +1,84 @@
+
+{% macro refer(header="Help support great journalism", 
+                text=False, 
+                link="https://checkout.chicagotribune.com/subscriptionPanel/?presentation=MTRDigital&PID=6354&zipCode=00000&int=ct_digitaladshouse_4-weeks-99_acquisition-subscriber_ngux_text-link_editorial_______multimedia-all", 
+                link_text="Subscribe", 
+                align_right=False, 
+                has_image=False, 
+                add_class=False,
+                unique_id=False) %}
+
+    {% set classes = "refer" %}
+
+    {% if align_right %}
+        {% set classes = classes + " refer--right" %}
+    {% endif %}    
+
+    {% if add_class %}
+        {% set classes = classes + " " + add_class %}
+    {% endif %}    
+
+    {% if has_image %}
+        {% set classes = classes + " refer--has-image" %}
+    {% endif %}    
+
+    {% if unique_id %}
+        {% set classes = classes + " refer--" + unique_id %}
+    {% endif %}    
+
+
+    <aside class='{{ classes }}'>
+        <div class='refer__inner'>
+            {% if has_image %}
+                <figure class='refer__image'>
+                    <img src='{{ has_image }}' />
+                </figure>
+                <div class='refer__text-wrapper'>
+                    {% if header %}<p class='refer__headline'>{{ header }}</p>{% endif %}
+                    {% if text %}<p class='refer__text'>{{ text }}</p>{% endif %}
+                    <a class='refer__button' href="{{ link }}" target="_blank" rel="noopener">{{ link_text }}</a>
+                </div>
+            
+            {% else %}
+                <div class='refer__text-wrapper'>
+                    {% if header %}<p class='refer__headline'>{{ header }}</p>{% endif %}
+                    {% if text %}<p class='refer__text'>{{ text }}</p>{% endif %}
+                </div>
+                <a class='refer__button' href="{{ link }}" target="_blank" rel="noopener">{{ link_text }}</a>
+            {% endif %}
+        </div>
+    </aside>
+{% endmacro %}
+
+{% macro keep_scrolling(direction="down", target=False, label=False, id=False) %}
+    {% if direction == 'down' %}
+        {% set add_class = "" %}
+    {% else %}
+        {% set add_class = "keep-scrolling-icon--back" %}
+    {% endif %}
+
+    {% if target and label %}
+        <a {% if id %}id={{ id }}{% endif %} class="keep-scrolling" href="{{ target }}" title="{{ label }}" aria-label="{{ label }}">
+            <span class='sr-only'>{{ label }}</span>
+    {% endif %}
+    <svg class='keep-scrolling__icon {{ add_class }}'>
+        <use xlink:href="#arrow" />
+    </svg>
+    {% if target and label %}
+        </a>
+    {% endif %}
+{% endmacro %}
+
+{% macro add_byline(byline, date_pub, date_mod, center=False) %}
+    <div class='byline {% if center %}byline--center{% endif %}'>
+        <p class='byline-name'>By {{ byline|process_text }}</p>
+        {% set date_published = date_pub|xldate_to_datetime %}
+        {% set date_published_iso = date_published|format_date_with_strftime("ISO") %}
+
+        {% set date_modified = date_mod|xldate_to_datetime %}
+        {% set date_modified_iso = date_modified|format_date_with_strftime("ISO") %}
+        {% set date_modified_readable = date_modified|format_date_with_strftime("%b. %d, %Y") %}
+        <meta itemprop="datePublished" content="{{ date_published_iso }}" datetime="{{ date_published_iso }}" />
+        <time class='byline-publish-date byline-publish-date--publish' itemprop="dateModified" content="{{ date_modified_iso }}" datetime="{{ date_modifified_iso }}">Published: {{ date_modified_readable }}</time>
+    </div>
+{% endmacro %}

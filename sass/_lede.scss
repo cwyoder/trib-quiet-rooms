@@ -1,0 +1,200 @@
+header.full-bleed {
+	position: relative;
+	height: 100vh;
+	figure {
+		position: absolute;
+		z-index: -1;
+		margin: 0;
+        background: linear-gradient(to bottom, #65a2e3 0%, #589ce3 10%, #4492dd 22%, #3c8bd8 29%, #297bcd 41%, #216ec0 50%, #1b64b3 60%, #165aa3 70%, #125194 79%, #12467f 91%, #14437b 100%);
+        #lede-art {
+            width: 100vw;
+            height: 100vh;
+            animation-iteration-count: 1;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position-y: center;
+            background-position-x: 0%;
+			background-image: url("/illinois-seclusion/img/header/ledepano_1125h.jpg");
+			// background-image: url("/img/header/ledepano_1125h.jpg");
+			@include breakpoint(md) {
+				background-image: url("/illinois-seclusion/img/header/ledepano_2048h.jpg");
+				// background-image: url("/img/header/ledepano_2048h.jpg");
+			}
+			@include breakpoint(lg) {
+				background-image: url("/illinois-seclusion/img/header/ledepano_2880h.jpg");
+				// background-image: url("/img/header/ledepano_2880h.jpg");
+			}
+            &.panning {
+                animation: panning 26s ease-in-out;
+                background-position-x: 100%;
+            }
+		}
+        @keyframes panning {
+            0% {
+                background-position-x: 0%;
+            }
+            100% {
+                background-position-x: 100%;
+            }
+        }
+
+        figcaption {
+			position: absolute;
+			font-family: 'Open Sans', sans-serif;
+			font-size: 14px;
+			z-index: 10;
+			color: white;
+			left: 6px;
+			bottom: 6px;
+		}
+	}
+	figure::after {
+		display: block;
+		position: relative;
+		width: 100%;
+		content: '';
+		margin-top: -100vh;
+		height: 100vh;
+		background-image: linear-gradient(to top, rgba(#000,.75) 0, rgba(0,0,0,0) 90%);
+	}
+	.title-wrapper {
+		position: absolute;
+		bottom: 0;
+		left: 0; // left, right for marginLR:auto to work at >max-width
+		right: 0;
+		margin: 0 3vw 13vh 3vw;
+		@include breakpoint(md) {
+			margin: 0 3vw 13vh 3vw;
+		}
+		@include breakpoint(xs) {
+			margin: 0 3vw 16vh 3vw;
+		}
+		.titles > * {
+			color: white;
+			text-align: center;
+		}
+	}
+	#lede-quote {
+		color: white;
+		font-family: 'Open Sans', sans-serif;
+		text-shadow: 0px 0px 4px rgba(0,0,0,1);
+		position: absolute;
+		top: 10vh;
+		margin: 2rem;
+		@include breakpoint(md) {
+			top: 20vh;
+			margin: 6rem;
+		}
+		.log {
+			font-family: 'Raleway', sans-serif;
+			margin-bottom: 0.5rem;
+			line-height: 1em;
+			font-weight: 700;
+			font-size: 20px;
+			@include breakpoint(sm) {
+				font-size: 23px;
+			}
+			@include breakpoint(md) {
+				font-size: 26px;
+			}
+			&::before {
+				content: "\201C";
+				position: absolute;
+				left: -0.48em;
+				top: 0.02em;
+			}
+		}
+		&.final {
+			margin-left: auto;
+			margin-right: auto;
+			left: 50vw;
+			text-align: center;
+			transform: translate(-50%,0);
+			width: 70vw;
+			& .log::before {
+				display: none;
+			}
+		}
+		.date, .school {
+			line-height: 1em;
+			text-transform: uppercase;
+			font-size: 12px;
+			@include breakpoint(sm) {
+				font-size: 14px;
+			}
+		}
+		
+	}
+	#lede-quote, .titles {
+		transition: opacity 1s ease-in;
+		opacity: 0;
+		&.show {
+			opacity: 1;
+		}
+	}
+
+	.quote-wrapper {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		top: 0;
+
+	}
+}
+
+
+///
+/// Viewport sized typography with minimum and maximum values
+///
+/// @author Eduardo Boucas (@eduardoboucas)
+///
+/// @param {Number}   $responsive  - Viewport-based size
+/// @param {Number}   $min         - Minimum font size (px)
+/// @param {Number}   $max         - Maximum font size (px)
+///                                  (optional)
+/// @param {Number}   $fallback    - Fallback for viewport-
+///                                  based units (optional)
+///
+/// @example scss - 5vw font size (with 50px fallback), 
+///                 minumum of 35px and maximum of 150px
+///  @include responsive-font(5vw, 35px, 150px, 50px);
+///
+
+
+
+.titles {
+	margin: 0 auto;
+	width: 70vw;
+	min-width: 400px;
+	@include breakpoint(xs) {
+		width: 90%;
+		min-width: 1px;
+	}
+
+	h1 {
+		font-family: 'Raleway', sans-serif;
+		line-height: 1em;
+		@include responsive-font(9.5vh, 60px, 82px, 65px);
+		font-weight: 800;
+		margin: 0 0 15px 0;
+		text-shadow: 0px 0px 4px rgba(0,0,0,.5);
+		@include breakpoint(xs) {
+			@include responsive-font(4vh, 40px, 70px, 50px);
+		}
+
+		span {
+			font-family: 'Raleway', sans-serif;
+			line-height: 1.2em;
+			font-size: 23px;
+			font-weight: 600;
+			margin: 0;
+			text-shadow: 0px 0px 4px rgba(0,0,0,.8);
+			display: block;
+		
+			@include breakpoint(xs) {
+				font-size: 17px;
+			}
+		}    
+	}
+}

@@ -1,0 +1,97 @@
+{% extends "_base.html" %}
+
+{% block library_scripts %}
+	<script src="//{{ ROOT_URL }}/js/vendor.min.js" type="text/javascript"></script>
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+{% endblock stylesheets %}
+
+
+{% block content %}
+	{# YOUR STUFF GOES HERE #}
+	<section id='header'>
+		{% include 'subtemplates/_new_header.html' %}
+		{% include 'subtemplates/_bylines.html' %}
+	</section>
+	<div class="advert" data-ad-type="leaderboard"></div>
+	<section id='story' class='story container'>
+	</section>
+	<section id='content' class='content container'>
+		<div class='river seclusion-dropcap'>
+			<div class='social-share-container'>
+				{% include "base-subtemplates/_social-share.html" %}
+			</div>
+			{% for story_chunk in seclusion.main %}
+	    		{# the story loop cannot access the story_chunk variable unless it is stashed in another variable like this. It's just the way Jinja operates. The story loop wants each chunk as a variable "s" #}
+	    		{% set s = story_chunk %} 
+	    		{% include "subtemplates/_story-loop.html" %}
+	    	{% endfor %}
+		</div>
+		<div class='river seclusion-dropcap'>
+			{% for story_chunk in seclusion.main_part2 %}
+	    		{% set s = story_chunk %} 
+	    		{% include "subtemplates/_story-loop.html" %}
+	    	{% endfor %}
+		</div>
+		<div class='river seclusion-dropcap'>
+			{% for story_chunk in seclusion.main_part3 %}
+	    		{% set s = story_chunk %} 
+	    		{% include "subtemplates/_story-loop.html" %}
+	    	{% endfor %}
+		</div>
+		<div class='river seclusion-dropcap'>
+			{% for story_chunk in seclusion.main_part4 %}
+	    		{% set s = story_chunk %} 
+	    		{% include "subtemplates/_story-loop.html" %}
+	    	{% endfor %}
+		</div>
+		<div class='river seclusion-dropcap'>
+			{% for story_chunk in seclusion.main_part5 %}
+	    		{% set s = story_chunk %} 
+	    		{% include "subtemplates/_story-loop.html" %}
+	    	{% endfor %}
+		</div>
+		<div class='river seclusion-dropcap'>
+			{% for story_chunk in seclusion.main_part6 %}
+	    		{% set s = story_chunk %} 
+	    		{% include "subtemplates/_story-loop.html" %}
+	    	{% endfor %}
+		</div>
+		<div class='river seclusion-dropcap'>
+			{% for story_chunk in seclusion.main_part7 %}
+	    		{% set s = story_chunk %} 
+	    		{% include "subtemplates/_story-loop.html" %}
+	    	{% endfor %}
+		</div>
+		<div class='river seclusion-dropcap'>
+			{% for story_chunk in seclusion.main_part8 %}
+	    		{% set s = story_chunk %} 
+	    		{% include "subtemplates/_story-loop.html" %}
+	    	{% endfor %}
+		</div>
+	</section>
+	<section id='credits' class='credits container'>
+		<div class='river'>
+			{% for credit in credits %}
+			{% if credit.img %}
+			<div class='credit-img'>
+				<img src='//{{ROOT_URL}}/img/credits/{{credit.img}}'>
+			</div>
+			{% endif %}
+			{{credit.text|markdown}}
+			{% endfor %}
+		</div>
+	</section>
+{% endblock content %}
+
+
+{% block scripts %}
+	<script>
+		window.LEDE_QUOTES = "//{{ ROOT_URL }}/data/quotes.json";
+	</script>
+	<script src="//{{ ROOT_URL }}/js/app.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="https://pixel.propublica.org/pixel.js" async="true"></script>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+.page-footer{
+	background: $trib-blue1;
+	box-sizing:border-box;
+	padding: 15px 0;
+	
+	&__nav{
+		@extend %container;
+		max-width: 750px;
+		list-style:none;
+
+		li{ 
+			text-align: center;
+			a{
+				@include sans-serif-text(13px, 1.3em, normal);
+			
+				color:white;
+			}
+		}
+	}
+}
+
+@media all and (min-width:$phablet-min-width){
+
+}
+
+@media all and (min-width:$tablet-min-width){
+	.page-footer__nav{
+		display:flex;
+		justify-content: space-between;
+		align-items: stretch;
+		align-content: center;
+		flex-wrap: nowrap;
+
+		li { flex: 1; }
+	}
+}

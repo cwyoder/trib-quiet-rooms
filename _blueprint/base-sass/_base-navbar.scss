@@ -1,0 +1,157 @@
+
+// :root {
+// 	--nav-inner-height: #{$navbar_inner_height};
+// 	--nav-overall-height: #{($navbar_inner_height * 2) + $navbar_padding_v};
+// }
+
+
+.navbar__menu{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background: $navbar_background_color;
+	box-shadow: 0 -3px 3px rgba(black, .25);
+	z-index: 1000;
+}
+
+body{ padding: 0 0 0 0; }
+
+.navbar{
+	
+	width: 100%;
+	z-index: 10000; // Set absurdly high b/c of Leaflet elements
+	padding: 0 $navbar_padding_h; // keeps a little space on the edges.
+	background: rgba($navbar_background_color, .95);
+
+	.container{
+		box-sizing: content-box;
+		display:flex;
+		justify-content: space-between;
+		align-items:center;
+		align-content:center;
+		
+		padding-top: $navbar_padding_v; // allows the container to govern the overall bar height
+		padding-bottom: $navbar_padding_v;// allows the container to govern the overall bar height
+		height: $navbar_inner_height;// allows the container to govern the overall bar height
+
+	}
+	
+	[itemprop="publisher"]{
+		height: $navbar_inner_height;
+		svg{
+			height: $navbar_inner_height;
+		}
+	}
+	
+	&__toggle{
+		box-sizing: border-box;
+		height: $navbar_inner_height;
+		width: $navbar_inner_height;
+		padding: $navbar_padding_v / 2;
+
+	    border: none;
+	    margin-right: 15px;
+	    
+	    background-color: transparent;
+	    background-image: none;
+	    border-radius: $border-radius--small;
+		cursor:pointer;
+
+		background: rgba(black, .1); 
+		transition: background 150ms ease;
+		&:hover, &:focus{ 
+			background: rgba(black, .4); 
+			transition: background 150ms ease;
+		}
+		
+		.icon-bar{
+			// The little stripes in the hamburger button
+			display: block;
+			width: 100%;
+			flex-basis: 2px;
+			border-radius: 1px;
+			background: white;
+
+		}
+	}
+	&__toggle-flex{
+		// Need to use this extra span b/c some browsers won't let <button> elements be flex containers at all.
+		display: flex;
+		flex-flow: column nowrap;
+		justify-content: space-around;
+		align-items:center;
+		width: 100%;
+		height: 100%;
+	}
+
+	&__title{
+		display:none;
+	}
+}
+
+
+
+@media all and (min-width: $phablet-min-width){
+	// ONLY CHANGES FOR THE SMALL RIVER (PHABS, TABS) + DESKTOPS	
+
+
+	body{ padding: #{$navbar_inner_height + ($navbar_padding_v * 2)} 0 0 0; }
+
+	.navbar__menu{
+		// Set it up to be styled with the JS module
+		max-width: 300px;
+		height: $navbar_inner_height;
+		position: absolute;
+		top: $navbar_padding_v;
+		left: 50%;
+		transform: translate(-50%, 0);
+
+		// Undo mobile styles
+		background: transparent;
+		box-shadow: none;
+	}
+
+	.navbar{		
+		position:fixed;
+		top:0;
+		left:0;
+		box-shadow: 0 0px 4px 3px rgba(black,.35);
+
+		.container{
+			// height: $navbar_inner_height;
+		}
+
+		[itemprop="publisher"] {
+			display: flex;
+			align-items: center;
+
+			svg { 
+				// Keeps the logo vertically centered.
+				// margin-top: #{($navbar_inner_height - $navbar_inner_height) / 2}
+			}
+		}
+		
+
+		&__title{
+			position:absolute;
+			top: 0;
+			left: 0;
+			height:100%;
+			width: 100%;
+
+			display:flex;
+			justify-content: center;
+			align-items:center;
+			
+			p{
+				@include sans-serif-text(18px, 1em, normal);
+				margin: 0;
+				padding: 0;
+				text-align: center;
+				color: rgba(white, .8);
+			}
+
+		}
+	}
+}

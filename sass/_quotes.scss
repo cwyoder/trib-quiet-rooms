@@ -1,0 +1,47 @@
+//PULLQUOTES
+
+.special-quote {
+	margin: 50px auto;
+	display: block;
+	border-left: 4px solid black;
+	padding: 0 0 0 15px;
+
+	blockquote {
+		font-family: "Raleway", sans-serif;
+		font-size: 24px;
+		font-weight: 700;
+		line-height: 1.3em;
+		margin: 8px 0 0 0;
+		font-style: italic;
+
+		@include breakpoint(xs) {
+			font-size: 21px;
+		}
+	}
+
+	// &::before {
+	// 	content: "";
+	// 	width: 40%;
+	// 	height: 1px;
+	// 	background-color: black;
+	// 	display: block;
+	// 	margin: 0 auto 30px auto;
+	// }
+
+	// &::after {
+	// 	content: "";
+	// 	width: 40%;
+	// 	height: 1px;
+	// 	background-color: black;
+	// 	display: block;
+	// 	margin: 35px auto 0 auto;
+	// }
+}
+
+.quote-info {
+	p {
+		@include sans-serif-text(14px, 1.4em);
+		margin: 0;
+		text-transform: uppercase;
+	}
+}

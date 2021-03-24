@@ -1,0 +1,32 @@
+.byline{
+	z-index:1000;
+	margin: #{$grid-gap / 2} 0;
+
+	&--center{
+		text-align:center;
+	}
+}
+
+.byline-name{
+	@include serif-text(18px, 1.3em, normal);
+	margin: 0 0 5px 0;
+
+	a{
+		color:$color-links;
+		text-decoration: none;
+		font-weight: bold;
+	}
+}
+
+.byline-publisher{
+	@include sans-serif();
+	margin: 0 0 15px 0;
+}
+
+[itemprop="dateModified"]{
+	@include agate();
+	text-transform: uppercase;
+	display:block;
+	margin:0;
+}
+

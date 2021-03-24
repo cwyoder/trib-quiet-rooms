@@ -1,0 +1,26 @@
+{% extends '_base.html' %}
+{% block content %}
+<div id="body" class="container-fluid">
+    <div class="failPage row-fluid">
+        <div class="span3">
+            <img src="http://www.chicagotribune.com/media/alternatethumbnails/blurb/2009-08/48450437-04100636.jpg" width="250" height="321" align="left" />
+        </div>
+        <div class="span9">
+            <h2>I can't seem to find the page you wanted.</h2>
+            <p>I'm sorry we had to meet under these circumstances, but allow me to <a href="http://www.facebook.com/Colonel.Tribune" target="_blank">introduce myself.</a>  I'm Colonel Tribune, the Web ambassador for chicagotribune.com.</p>
+            <p>Perhaps I can help you find what you wanted when you hit this error page? Try our <a href="/search_results/">search</a> or our <a href="/topic">topics</a> pages. If you are looking for an article that is more than a month old, you may  find it in our <a href="/archives">archives.</a></p>
+            <p>If that doesn't work, please feel free to leave us a question <a href="/feedback" target="_blank">here.</a></p>
+            <p>Meantime, I hope I run into you surfing the Web. You can find me on <a href="http://twitter.com/ColonelTribune" target="_blank">Twitter</a> and <a href="http://www.facebook.com/Colonel.Tribune" target="_blank">Facebook.</a></p>
+            <p>Have a good day!</p>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{#
+ # Don't try to render omniture tracking code.  It requires the OMNITURE
+ # context variable and Tarbell doesn't pass the full context to the 404
+ # template.
+ #}
+{% block omniture %}{% endblock omniture %}
+{% block omniture_scripts %}{% endblock omniture_scripts %}
