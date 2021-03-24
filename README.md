@@ -1,3 +1,5 @@
+NOTE: ALL MEDIA HAS BEEN REMOVED FROM REPOSITORY TO MAKE IT PUBLIC
+
 # Illinois school seclusion
 
 A [Tarbell](http://tarbell.io) project.
