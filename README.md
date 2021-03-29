@@ -1,5 +1,7 @@
 NOTE: ALL MEDIA HAS BEEN REMOVED FROM REPOSITORY TO MAKE IT PUBLIC
 
+You can look at the project here: https://graphics.chicagotribune.com/illinois-seclusion/index.html
+
 # Illinois school seclusion
 
 A [Tarbell](http://tarbell.io) project.
